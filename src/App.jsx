@@ -4,7 +4,7 @@ import init, { Universe, Cell } from 'rust-wasm';
 import { useAnimation } from './hooks/useAnimation';
 
 const raw = await init();
-const universe = Universe.new(64, 64);
+const universe = Universe.new(64, 64, true);
 const width = universe.width();
 const height = universe.height();
 
@@ -13,7 +13,7 @@ function App() {
 
   return (
     <div id="playground">
-      <h1>Generation {genCount}</h1>
+      <h3 style={{margin: '10px'}}>Generation {genCount}</h3>
       <canvas ref={canvasRef}></canvas>
     </div>
   )
