@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "wasm": "wasm-pack build rust-wasm --target web",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
@@ -11,7 +12,8 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "vite-plugin-wasm": "^3.2.1"
+    "vite-plugin-wasm": "^3.2.1",
+    "rust-wasm": "file:./rust-wasm/pkg"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",
