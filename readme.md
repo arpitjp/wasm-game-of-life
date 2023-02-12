@@ -5,8 +5,14 @@ Click on cells to toggle state
 - Install `node`, `npm`, `rust`, `wasm-pack`
 - `npm run wasm`
 - `npm run i`
-## Deploy
+
+To deploy to GitHub pages, run
 `chmod 777 ./deploy.sh && ./deploy.sh`
 ## Stack
 - UI - React, Vite
 - Game renderer - Rust compiled to WASM
+
+## To do
+- [] Stabilize frame rate
+- [] Frame rate control
+- [] Average frame rate info

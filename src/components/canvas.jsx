@@ -6,7 +6,8 @@ export const Canvas = ({ universe, dimension, isPlaying, setIsPlaying }) => {
   const canvasRef = useAnimation({ universe, setGenCount, isPlaying });
 
   return <>
-    <h3 style={{ margin: '0px 0px 15px 0px' }}>Dimension: {dimension} | Generation: {genCount}</h3>
+    <h3 style={{ margin: '0px 0px 5px 0px' }}>Game of Life</h3>
+    <p style={{ margin: '0px 0px 15px 0px', fontSize: '12px' }}>Dimension: {dimension} | Generation: {genCount}</p>
     <div style={{
       display: 'flex',
       justifyContent: 'center',
