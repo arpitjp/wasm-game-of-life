@@ -13,10 +13,6 @@ export const Canvas = ({ universe, dimension, isPlaying, setIsPlaying }) => {
     >
       {isPlaying ? 'Pause ⏸' : 'Play ▶'}
     </button>
-    <canvas
-      style={{
-        outline: '1px solid lightgrey'
-      }} ref={canvasRef}
-    />
+    <canvas ref={canvasRef} />
   </>
 }
