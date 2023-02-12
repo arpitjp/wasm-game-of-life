@@ -30,7 +30,6 @@ export const useAnimation = ({ universe, setGenCount, isPlaying, setAvgFps, fps 
       if (canvasRef.current) {
         // frame rate things
         const now = Math.round(fps * performance.now() / 1000);
-        console.log(now);
         if (now !== prevTick || !keepRendering) {
           prevTick = now;
           setAvgFps(measureFps(performance.now()));
@@ -90,7 +89,6 @@ export const useAnimation = ({ universe, setGenCount, isPlaying, setAvgFps, fps 
     
       const row = Math.min(Math.floor(canvasTop / (CELL_SIZE + 1)), height - 1);
       const col = Math.min(Math.floor(canvasLeft / (CELL_SIZE + 1)), width - 1);
-      console.log("row, col", row, col);
       universe.toggle_cell(row, col);
     
       drawGrid({ctx, width, height});

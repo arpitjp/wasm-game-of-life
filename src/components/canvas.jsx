@@ -3,11 +3,11 @@ import { useAnimation } from "../hooks/useAnimation";
 
 const buttonStyle = {
   height: '25px',
-  margin: '5px',
+  margin: '8px',
   border: 'none',
   backgroundColor: 'transparent',
   outline: '1px solid grey',
-  borderRadius: '5px',
+  borderRadius: '10px',
 };
 
 export const Canvas = ({ universe, dimension, isPlaying, setIsPlaying }) => {
@@ -18,7 +18,7 @@ export const Canvas = ({ universe, dimension, isPlaying, setIsPlaying }) => {
 
   return <>
     <h3 style={{ margin: '0px 0px 5px 0px' }}>Game of Life</h3>
-    <p style={{ margin: '0px 0px 15px 0px', fontSize: '11px' }}>Dimension: {dimension} | Generation: {genCount} | Average FPS: {avgFps}</p>
+    <p style={{ margin: '0px 0px 10px 0px', fontSize: '10px' }}>Dimension: {dimension} | Generation: {genCount} | Average FPS: {avgFps}</p>
     <div style={{
       display: 'flex',
       justifyContent: 'center',

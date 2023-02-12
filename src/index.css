@@ -5,7 +5,7 @@
 
 html, body {margin: 0; height: 100%; overflow: hidden}
 
-#github-link:hover {transform: scale(1.5);}
+#github-link:hover {transform: scale(1.2);}
 
 #playground {
   width: 100%;
