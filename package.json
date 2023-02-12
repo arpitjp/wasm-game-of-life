@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "wasm": "wasm-pack build rust-wasm --target web",
-    "dev": "vite",
+    "dev": "vite --port 3000",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview --port 3000"
   },
   "dependencies": {
     "react": "^18.2.0",
