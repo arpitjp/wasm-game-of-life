@@ -47,6 +47,7 @@ export const Canvas = ({ universe, dimension, isPlaying, setIsPlaying }) => {
               // setIsPlaying(true);
               universe.clear_all();
               setGenCount(0);
+              setAvgFps(0);
               setIsPlaying(false);
             } : () => window.location.reload()}
           >
@@ -57,12 +58,13 @@ export const Canvas = ({ universe, dimension, isPlaying, setIsPlaying }) => {
           value={fps}
           onChange={(event) => setFps(parseInt(event.target.value))}
         >
-          <option value="1">1 FPS</option>
-          <option value="5">5 FPS</option>
-          <option value="10">10 FPS</option>
-          <option value="20">20 FPS</option>
-          <option value="30">30 FPS</option>
-          <option value="60">60 FPS</option>
+          <option value="1">1 fps</option>
+          <option value="5">5 fps</option>
+          <option value="10">10 fps</option>
+          <option value="20">20 fps</option>
+          <option value="30">30 fps</option>
+          <option value="60">60 fps</option>
+          <option value="10000">Max fps</option>
         </select>
       </div>
       <canvas ref={canvasRef} />

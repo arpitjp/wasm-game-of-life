@@ -34,14 +34,14 @@ function App() {
           <span
             title="Open Wikipedia article"
             style={{
-              outline: "1px solid black",
+              // outline: "1px solid black",
               borderRadius: "15px",
-              fontSize: "10px",
+              fontSize: "12px",
               padding: "4px 6px",
-              marginRight: "15px",
+              marginRight: "12px",
             }}
           >
-            Game Rules
+            Check Rules
           </span>
         </a>
 
