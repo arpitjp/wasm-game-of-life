@@ -9,7 +9,7 @@ function App() {
 
   return (
     <div id="playground">
-      <h3 style={{margin: '10px'}}>Generation {genCount}</h3>
+      <h3 style={{margin: '16px'}}>Generation {genCount}</h3>
       <canvas style={{outline: '1px solid grey'}} ref={canvasRef}></canvas>
     </div>
   )

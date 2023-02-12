@@ -4,7 +4,7 @@ import { CELL_SIZE } from '../constants';
 
 const getDimensions = () => {
   const vw = window.innerWidth*0.8;
-  const vh = window.innerHeight*0.7;
+  const vh = window.innerHeight*0.8;
   const h = Math.floor(vh / CELL_SIZE);
   const w = Math.floor(vw / CELL_SIZE);
   return {h, w};
