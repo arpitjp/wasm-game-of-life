@@ -29,14 +29,14 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
           href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life"
-          style={{ color: "black", textDecoration: "none" }}
+          style={{ color: "black", textDecoration: "none", marginBottom: '6px' }}
         >
           <span
             title="Open Wikipedia article"
             style={{
               outline: "1px solid black",
               borderRadius: "15px",
-              fontSize: "12px",
+              fontSize: "10px",
               padding: "4px 6px",
               marginRight: "15px",
             }}
@@ -54,7 +54,7 @@ function App() {
           <img
             src={image}
             title="Check code on GitHub"
-            width="30"
+            width="25"
             alt="GitHub Repo"
           />
         </a>

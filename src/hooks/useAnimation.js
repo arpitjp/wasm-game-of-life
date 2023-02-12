@@ -118,7 +118,7 @@ export const useAnimation = ({
           Math.floor(canvasLeft / (CELL_SIZE + 1)),
           width - 1
         );
-        window.navigator.vibrate(100);
+        window.navigator.vibrate(1);
         universe.toggle_cell(row, col);
 
         drawGrid({ ctx, width, height });

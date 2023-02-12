@@ -11,10 +11,6 @@ body {
   overflow: hidden;
 }
 
-#github-link:hover {
-  transform: scale(1.2);
-}
-
 #playground {
   width: 100%;
   height: 100vh;

@@ -41,19 +41,17 @@ export const Canvas = ({ universe, dimension, isPlaying, setIsPlaying }) => {
         <button style={buttonStyle} onClick={() => setIsPlaying(!isPlaying)}>
           {isPlaying ? "Pause ⏸" : "Play ▶"}
         </button>
-        {isPlaying && (
-          <button
+        <button
             style={buttonStyle}
-            onClick={() => {
+            onClick={isPlaying ? () => {
               // setIsPlaying(true);
               universe.clear_all();
               setGenCount(0);
               setIsPlaying(false);
-            }}
+            } : () => window.location.reload()}
           >
-            Clear
+            {isPlaying ? 'Clear' : 'Reload ↻'}
           </button>
-        )}
         <select
           style={buttonStyle}
           value={fps}
