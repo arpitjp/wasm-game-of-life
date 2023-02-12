@@ -35,7 +35,7 @@ export const Canvas = ({ universe, dimension, isPlaying, setIsPlaying }) => {
 
   return (
     <>
-      <span style={frameStyle}>{avgFps} / {fps == 10000 ? 'Max' : fps}</span>
+      {isPlaying && <span style={frameStyle}>{avgFps} / {fps == 10000 ? 'Max' : fps}</span>}
       <h3 style={{ margin: "0px 0px 5px 0px" }}>Game of Life</h3>
       <i style={{ margin: "0px 0px 10px 0px", fontSize: "10px" }}>
         Dimension: {dimension} | Generation: {genCount}
@@ -57,7 +57,6 @@ export const Canvas = ({ universe, dimension, isPlaying, setIsPlaying }) => {
               // setIsPlaying(true);
               universe.clear_all();
               setGenCount(0);
-              setAvgFps(0);
               setIsPlaying(false);
             } : () => window.location.reload()}
           >
