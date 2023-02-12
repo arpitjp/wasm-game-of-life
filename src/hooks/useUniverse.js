@@ -1,12 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import init, { Universe, Cell } from 'rust-wasm';
 import { CELL_SIZE } from '../constants';
 
 const getDimensions = () => {
   const vw = window.innerWidth*0.8;
   const vh = window.innerHeight*0.7;
-  const h = Math.floor(vh / CELL_SIZE);
-  const w = Math.floor(vw / CELL_SIZE);
+  const h = Math.max(3, Math.floor(vh / CELL_SIZE));
+  const w = Math.max(3, Math.floor(vw / CELL_SIZE));
   return {h, w};
 }
 
