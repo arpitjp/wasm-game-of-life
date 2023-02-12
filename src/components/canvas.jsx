@@ -11,10 +11,19 @@ const buttonStyle = {
   borderRadius: "15px",
 };
 
+const frameStyle = {
+  fontSize: "2vh",
+  position: "absolute",
+  top: "0",
+  left: '0',
+  margin: "0.5vh",
+  color: 'rgba(0, 0, 0, 0.3)',
+}
+
 export const Canvas = ({ universe, dimension, isPlaying, setIsPlaying }) => {
   const [genCount, setGenCount] = useState(0);
   const [avgFps, setAvgFps] = useState(0);
-  const [fps, setFps] = useState(30);
+  const [fps, setFps] = useState(window.localStorage.getItem('fps') || 30);
   const canvasRef = useAnimation({
     universe,
     setGenCount,
@@ -26,9 +35,10 @@ export const Canvas = ({ universe, dimension, isPlaying, setIsPlaying }) => {
 
   return (
     <>
+      <span style={frameStyle}>{avgFps} / {fps == 10000 ? 'Max' : fps}</span>
       <h3 style={{ margin: "0px 0px 5px 0px" }}>Game of Life</h3>
       <i style={{ margin: "0px 0px 10px 0px", fontSize: "10px" }}>
-        Dimension: {dimension} | Generation: {genCount} | Average FPS: {avgFps}
+        Dimension: {dimension} | Generation: {genCount}
       </i>
       <div
         style={{
@@ -56,7 +66,11 @@ export const Canvas = ({ universe, dimension, isPlaying, setIsPlaying }) => {
         <select
           style={buttonStyle}
           value={fps}
-          onChange={(event) => setFps(parseInt(event.target.value))}
+          onChange={(event) => {
+            const val = parseInt(event.target.value);
+            setFps(val);
+            window.localStorage.setItem('fps', val);
+          }}
         >
           <option value="1">1 fps</option>
           <option value="5">5 fps</option>
