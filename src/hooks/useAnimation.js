@@ -29,7 +29,11 @@ export const useAnimation = ({
 }) => {
   const animationRef = useRef(0);
   const canvasRef = useRef(null);
-  const [openSnackbar, closeSnackBar] = useSnackbar()
+  const [openSnackbar, closeSnackBar] = useSnackbar({style: {
+    backgroundColor: 'black',
+    color: 'white',
+    textAlign: 'center',
+  }})
 
   const height = universe.height();
   const width = universe.width();
@@ -46,7 +50,7 @@ export const useAnimation = ({
 
           // await pause(100);
           if (!universe.tick()) {
-            keepRendering && openSnackbar('All cells are dead 🙁. Click on few cells & re-try', 3000);
+            keepRendering && openSnackbar('All cells are dead 🙁. Try drawing some pattern on grid...', 3000);
             setIsPlaying(false);
             setGenCount(0);
           };
