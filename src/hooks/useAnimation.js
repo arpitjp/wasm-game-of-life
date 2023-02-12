@@ -11,14 +11,20 @@ const measureFps = (now) => {
   }
   times.push(now);
   return times.length;
-}
+};
 
 // frame rate
-let prevTick = 0; 
+let prevTick = 0;
 
 const { memory } = await init();
 
-export const useAnimation = ({ universe, setGenCount, isPlaying, setAvgFps, fps }) => {
+export const useAnimation = ({
+  universe,
+  setGenCount,
+  isPlaying,
+  setAvgFps,
+  fps,
+}) => {
   const animationRef = useRef(0);
   const canvasRef = useRef(null);
   const height = universe.height();
@@ -29,15 +35,15 @@ export const useAnimation = ({ universe, setGenCount, isPlaying, setAvgFps, fps 
     const renderCanvas = async (time, keepRendering = true) => {
       if (canvasRef.current) {
         // frame rate things
-        const now = Math.round(fps * performance.now() / 1000);
+        const now = Math.round((fps * performance.now()) / 1000);
         if (now !== prevTick || !keepRendering) {
           prevTick = now;
           setAvgFps(measureFps(performance.now()));
-          
+
           // await pause(100);
           universe.tick();
           setGenCount((prev) => prev + 1);
-          const ctx = canvasRef.current.getContext('2d');
+          const ctx = canvasRef.current.getContext("2d");
 
           // REFER: canvas resolution fix trick: https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio
           const widthSize = (CELL_SIZE + 1) * width + 1;
@@ -52,49 +58,65 @@ export const useAnimation = ({ universe, setGenCount, isPlaying, setAvgFps, fps 
           // Normalize coordinate system to use css pixels.
           ctx.scale(scale, scale);
 
-          drawGrid({ctx, width, height});
-          drawCells({ctx, universe, memory, height, width, Cell});
+          drawGrid({ ctx, width, height });
+          drawCells({ ctx, universe, memory, height, width, Cell });
         }
-        
       }
       if (keepRendering) {
-        animationRef.current = requestAnimationFrame((time) => renderCanvas(time));
+        animationRef.current = requestAnimationFrame((time) =>
+          renderCanvas(time)
+        );
       }
-    }
+    };
 
-    if (isPlaying) { 
-      animationRef.current = requestAnimationFrame((time) => renderCanvas(time));
+    if (isPlaying) {
+      animationRef.current = requestAnimationFrame((time) =>
+        renderCanvas(time)
+      );
     } else {
       // at-least render once
       cancelAnimationFrame(animationRef.current);
-      animationRef.current = requestAnimationFrame((time) => renderCanvas(time, false));
+      animationRef.current = requestAnimationFrame((time) =>
+        renderCanvas(time, false)
+      );
     }
     return () => cancelAnimationFrame(animationRef.current);
-  }, [height, isPlaying, setGenCount, universe, width, fps, setAvgFps])
+  }, [height, isPlaying, setGenCount, universe, width, fps, setAvgFps]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    canvas.addEventListener("click", event => {
-      event.stopImmediatePropagation();
+    canvas.addEventListener(
+      "click",
+      (event) => {
+        event.stopImmediatePropagation();
 
-      const scale = window.devicePixelRatio;
-      const ctx = canvas.getContext('2d');
-      const boundingRect = canvas.getBoundingClientRect();
-    
-      const scaleX = canvas.width / boundingRect.width;
-      const scaleY = canvas.height / boundingRect.height;
-    
-      const canvasLeft = (event.clientX - boundingRect.left) * scaleX/scale;
-      const canvasTop = (event.clientY - boundingRect.top) * scaleY/scale;
-    
-      const row = Math.min(Math.floor(canvasTop / (CELL_SIZE + 1)), height - 1);
-      const col = Math.min(Math.floor(canvasLeft / (CELL_SIZE + 1)), width - 1);
-      universe.toggle_cell(row, col);
-    
-      drawGrid({ctx, width, height});
-      drawCells({ctx, universe, memory, height, width, Cell});
-    }, false);
+        const scale = window.devicePixelRatio;
+        const ctx = canvas.getContext("2d");
+        const boundingRect = canvas.getBoundingClientRect();
+
+        const scaleX = canvas.width / boundingRect.width;
+        const scaleY = canvas.height / boundingRect.height;
+
+        const canvasLeft =
+          ((event.clientX - boundingRect.left) * scaleX) / scale;
+        const canvasTop = ((event.clientY - boundingRect.top) * scaleY) / scale;
+
+        const row = Math.min(
+          Math.floor(canvasTop / (CELL_SIZE + 1)),
+          height - 1
+        );
+        const col = Math.min(
+          Math.floor(canvasLeft / (CELL_SIZE + 1)),
+          width - 1
+        );
+        universe.toggle_cell(row, col);
+
+        drawGrid({ ctx, width, height });
+        drawCells({ ctx, universe, memory, height, width, Cell });
+      },
+      false
+    );
     return () => canvas.removeEventListener("click", () => {});
-  }, [height, universe, width])
+  }, [height, universe, width]);
   return canvasRef;
-}
+};
