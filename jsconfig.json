@@ -1,0 +1,8 @@
+// vscode jsconfig fro react projects
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "allowJs": true,
+  },
+  "exclude": ["node_modules", "dist"]
+}

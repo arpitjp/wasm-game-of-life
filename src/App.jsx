@@ -1,18 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react';
 import './index.css';
-import { useAnimation } from './hooks/useAnimation';
+import { useState } from 'react';
 import { useUniverse } from './hooks/useUniverse';
+import { Canvas } from './components/canvas.jsx';
 
 function App() {
-  const { universe, Cell, memory } = useUniverse();
-  const {genCount, canvasRef} = useAnimation({universe, memory, Cell});
-
+  const { universe, h, w } = useUniverse();
+  const [isPlaying, setIsPlaying] = useState(true);
+  const dimension = `${h}x${w}`;
   return (
     <div id="playground">
-      <h3 style={{margin: '0px 0px 20px 0px'}}>Generation {genCount}</h3>
-      <canvas style={{
-        // outline: '1px solid lightgrey'
-      }} ref={canvasRef}></canvas>
+      <Canvas
+        key={dimension}
+        universe={universe}
+        dimension={dimension}
+        isPlaying={isPlaying}
+        setIsPlaying={setIsPlaying}
+      />
     </div>
   )
 }
