@@ -7,7 +7,12 @@ export const Canvas = ({ universe, dimension, isPlaying, setIsPlaying }) => {
 
   return <>
     <h3 style={{ margin: '0px 0px 20px 0px' }}>Dimension: {dimension} | Generation: {genCount}</h3>
-    <button onClick={() => setIsPlaying(!isPlaying)}>{isPlaying ? 'Pause ⏸' : 'Play ▶'}</button>
+    <button
+      style={{ height: '25px', marginBottom: '5px' }}
+      onClick={() => setIsPlaying(!isPlaying)}
+    >
+      {isPlaying ? 'Pause ⏸' : 'Play ▶'}
+    </button>
     <canvas
       style={{
         outline: '1px solid lightgrey'
