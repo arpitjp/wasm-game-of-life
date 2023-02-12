@@ -5,6 +5,7 @@ set -e
 
 # build
 npm run wasm
+npm i
 npm run build
 
 # navigate into the build output directory

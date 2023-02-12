@@ -51,6 +51,12 @@ impl Universe {
         }).collect();
         Universe {height, width, cells}
     }
+    pub fn clear_all(&mut self) {
+        let new_cells = (0..self.height*self.width).map(|_i| {
+            Cell::Dead
+        }).collect();
+        self.cells = new_cells;
+    }
     pub fn width(&self) -> u32 {
         self.width
     }
