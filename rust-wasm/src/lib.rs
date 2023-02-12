@@ -104,8 +104,9 @@ impl Universe {
         live
     }
 
-    pub fn tick(&mut self) {
+    pub fn tick(&mut self) -> bool {
         let mut new_gen = self.cells.clone();
+        let mut at_least_one = false;
         for r in 0..self.height {
             for c in 0..self.width {
                 let idx = self.get_cell(r, c);
@@ -117,18 +118,21 @@ impl Universe {
                 //     self.cells[idx],
                 //     live_neighbours
                 // );
-                new_gen[idx] = match(live_neighbours, self.cells[idx]) {
+                let new_cell = match(live_neighbours, self.cells[idx]) {
                     (3, Cell::Dead) => Cell::Alive, // Rule1: re-birth
                     (x, Cell::Alive) if x < 2 => Cell::Dead, // Rule2: under population (no sex)
                     (2, Cell::Alive) | (3, Cell::Alive) => Cell::Alive, // Rule3: perfectly balanced
                     (x, Cell::Alive) if x > 3 => Cell::Dead, // Rule4: over population
                     (_, x) => x // same old same old
                 };
+                if new_cell == Cell::Alive {at_least_one = true};
+                new_gen[idx] = new_cell;
                 // log!("    it becomes {:?}", new_gen[idx]);
             }
         }
 
         self.cells = new_gen;
+        at_least_one
     }
 }
 

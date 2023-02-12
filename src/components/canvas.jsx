@@ -2,12 +2,13 @@ import { useState } from "react";
 import { useAnimation } from "../hooks/useAnimation";
 
 const buttonStyle = {
-  height: "25px",
+  height: "20px",
+  fontSize: '12px',
   margin: "8px",
   border: "none",
   backgroundColor: "transparent",
   outline: "1px solid grey",
-  borderRadius: "10px",
+  borderRadius: "15px",
 };
 
 export const Canvas = ({ universe, dimension, isPlaying, setIsPlaying }) => {
@@ -25,9 +26,9 @@ export const Canvas = ({ universe, dimension, isPlaying, setIsPlaying }) => {
   return (
     <>
       <h3 style={{ margin: "0px 0px 5px 0px" }}>Game of Life</h3>
-      <p style={{ margin: "0px 0px 10px 0px", fontSize: "10px" }}>
+      <i style={{ margin: "0px 0px 10px 0px", fontSize: "10px" }}>
         Dimension: {dimension} | Generation: {genCount} | Average FPS: {avgFps}
-      </p>
+      </i>
       <div
         style={{
           display: "flex",
