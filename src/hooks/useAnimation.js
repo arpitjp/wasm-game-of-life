@@ -3,6 +3,7 @@ import init, { Cell } from "rust-wasm";
 import { CELL_SIZE } from "../constants";
 import { drawCells, drawGrid, pause } from "../utils";
 
+// measure average fps
 var times = [];
 const measureFps = (now) => {
   while (times.length > 0 && times[0] <= now - 1000) {
@@ -12,9 +13,12 @@ const measureFps = (now) => {
   return times.length;
 }
 
+// frame rate
+let prevTick = 0; 
+
 const { memory } = await init();
 
-export const useAnimation = ({ universe, setGenCount, isPlaying, setAvgFps }) => {
+export const useAnimation = ({ universe, setGenCount, isPlaying, setAvgFps, fps }) => {
   const animationRef = useRef(0);
   const canvasRef = useRef(null);
   const height = universe.height();
@@ -24,27 +28,35 @@ export const useAnimation = ({ universe, setGenCount, isPlaying, setAvgFps }) =>
   useEffect(() => {
     const renderCanvas = async (time, keepRendering = true) => {
       if (canvasRef.current) {
-        setAvgFps(measureFps(performance.now()));
-        // await pause(100);
-        universe.tick();
-        setGenCount((prev) => prev + 1);
-        const ctx = canvasRef.current.getContext('2d');
+        // frame rate things
+        const now = Math.round(fps * performance.now() / 1000);
+        console.log(now);
+        if (now !== prevTick || !keepRendering) {
+          prevTick = now;
+          setAvgFps(measureFps(performance.now()));
+          
+          // await pause(100);
+          universe.tick();
+          setGenCount((prev) => prev + 1);
+          const ctx = canvasRef.current.getContext('2d');
 
-        // REFER: canvas resolution fix trick: https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio
-        const widthSize = (CELL_SIZE + 1) * width + 1;
-        const heightSize = (CELL_SIZE + 1) * height + 1;
-        // first set in css in pixels
-        canvasRef.current.style.height = `${heightSize}px`;
-        canvasRef.current.style.width = `${widthSize}px`;
-        const scale = window.devicePixelRatio; // Change to 1 on retina screens to see blurry canvas.
-        // then set again in device aspect ratio
-        canvasRef.current.height = Math.floor(heightSize * scale);
-        canvasRef.current.width = Math.floor(widthSize * scale);
-        // Normalize coordinate system to use css pixels.
-        ctx.scale(scale, scale);
+          // REFER: canvas resolution fix trick: https://developer.mozilla.org/en-US/docs/Web/API/Window/devicePixelRatio
+          const widthSize = (CELL_SIZE + 1) * width + 1;
+          const heightSize = (CELL_SIZE + 1) * height + 1;
+          // first set in css in pixels
+          canvasRef.current.style.height = `${heightSize}px`;
+          canvasRef.current.style.width = `${widthSize}px`;
+          const scale = window.devicePixelRatio; // Change to 1 on retina screens to see blurry canvas.
+          // then set again in device aspect ratio
+          canvasRef.current.height = Math.floor(heightSize * scale);
+          canvasRef.current.width = Math.floor(widthSize * scale);
+          // Normalize coordinate system to use css pixels.
+          ctx.scale(scale, scale);
 
-        drawGrid({ctx, width, height});
-        drawCells({ctx, universe, memory, height, width, Cell});
+          drawGrid({ctx, width, height});
+          drawCells({ctx, universe, memory, height, width, Cell});
+        }
+        
       }
       if (keepRendering) {
         animationRef.current = requestAnimationFrame((time) => renderCanvas(time));
@@ -59,7 +71,7 @@ export const useAnimation = ({ universe, setGenCount, isPlaying, setAvgFps }) =>
       animationRef.current = requestAnimationFrame((time) => renderCanvas(time, false));
     }
     return () => cancelAnimationFrame(animationRef.current);
-  }, [height, isPlaying, setGenCount, universe, width])
+  }, [height, isPlaying, setGenCount, universe, width, fps, setAvgFps])
 
   useEffect(() => {
     const canvas = canvasRef.current;

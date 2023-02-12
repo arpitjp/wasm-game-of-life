@@ -14,10 +14,7 @@ To deploy to GitHub pages, run
 - Game renderer - Rust compiled to WASM
 
 ## To do
-- [ ] Stabilize frame rate
-- [ ] Frame rate control
-- [ ] Average frame rate info
-- [ ] Enable clear button when the render is paused
+- [ ] Auto pause incase of zero alive cells
 
 ## Reference / Credits
 https://rustwasm.github.io/docs/book/game-of-life
