@@ -2,7 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import { CELL_SIZE } from "../constants";
 import { drawCells, drawGrid, pause } from "../utils";
 
-export const useAnimation = ({universe, width, height, memory, Cell}) => {
+export const useAnimation = ({ universe, memory, Cell }) => {
+  const height = universe.height();
+  const width = universe.width();
+
   const animationRef = useRef(0);
   const canvasRef = useRef(null);
   const [genCount, setGenCount] = useState(0);
@@ -24,9 +27,10 @@ export const useAnimation = ({universe, width, height, memory, Cell}) => {
   }
 
   useEffect(() => {
+    setGenCount(0);
     animationRef.current = requestAnimationFrame(renderLoop);
     return () => cancelAnimationFrame(animationRef.current);
-  }, [])
+  }, [universe, memory, Cell])
 
   return { genCount, canvasRef };
 }

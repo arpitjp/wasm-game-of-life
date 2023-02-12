@@ -1,15 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './index.css';
-import init, { Universe, Cell } from 'rust-wasm';
 import { useAnimation } from './hooks/useAnimation';
-
-const raw = await init();
-const universe = Universe.new(64, 64, true);
-const width = universe.width();
-const height = universe.height();
+import { useUniverse } from './hooks/useUniverse';
 
 function App() {
-  const {genCount, canvasRef} = useAnimation({universe, width, height, memory: raw.memory, Cell});
+  const { universe, Cell, memory } = useUniverse();
+  const {genCount, canvasRef} = useAnimation({universe, memory, Cell});
 
   return (
     <div id="playground">
