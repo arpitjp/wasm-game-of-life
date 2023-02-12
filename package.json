@@ -12,8 +12,9 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "vite-plugin-wasm": "^3.2.1",
-    "rust-wasm": "file:./rust-wasm/pkg"
+    "rust-wasm": "file:./rust-wasm/pkg",
+    "vite-plugin-top-level-await": "^1.2.4",
+    "vite-plugin-wasm": "^3.2.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",
