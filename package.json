@@ -12,6 +12,7 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-simple-snackbar": "^1.1.11",
     "rust-wasm": "file:./rust-wasm/pkg",
     "vite-plugin-top-level-await": "^1.2.4",
     "vite-plugin-wasm": "^3.2.1"

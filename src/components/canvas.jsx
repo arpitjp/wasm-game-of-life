@@ -19,6 +19,7 @@ export const Canvas = ({ universe, dimension, isPlaying, setIsPlaying }) => {
     universe,
     setGenCount,
     isPlaying,
+    setIsPlaying,
     setAvgFps,
     fps,
   });

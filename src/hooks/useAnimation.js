@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { useSnackbar } from "react-simple-snackbar";
 import init, { Cell } from "rust-wasm";
 import { CELL_SIZE } from "../constants";
 import { drawCells, drawGrid, pause } from "../utils";
@@ -22,11 +23,14 @@ export const useAnimation = ({
   universe,
   setGenCount,
   isPlaying,
+  setIsPlaying,
   setAvgFps,
   fps,
 }) => {
   const animationRef = useRef(0);
   const canvasRef = useRef(null);
+  const [openSnackbar, closeSnackBar] = useSnackbar()
+
   const height = universe.height();
   const width = universe.width();
 
@@ -41,7 +45,11 @@ export const useAnimation = ({
           setAvgFps(measureFps(performance.now()));
 
           // await pause(100);
-          universe.tick();
+          if (!universe.tick()) {
+            keepRendering && openSnackbar('Game Over! (All cells are dead) 🙁', 3000);
+            setIsPlaying(false);
+            setGenCount(0);
+          };
           setGenCount((prev) => prev + 1);
           const ctx = canvasRef.current.getContext("2d");
 
@@ -81,7 +89,7 @@ export const useAnimation = ({
       );
     }
     return () => cancelAnimationFrame(animationRef.current);
-  }, [height, isPlaying, setGenCount, universe, width, fps, setAvgFps]);
+  }, [height, isPlaying, setGenCount, universe, width, fps, setAvgFps, setIsPlaying]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
