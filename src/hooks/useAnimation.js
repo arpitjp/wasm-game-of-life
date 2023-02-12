@@ -3,9 +3,18 @@ import init, { Cell } from "rust-wasm";
 import { CELL_SIZE } from "../constants";
 import { drawCells, drawGrid, pause } from "../utils";
 
+var times = [];
+const measureFps = (now) => {
+  while (times.length > 0 && times[0] <= now - 1000) {
+    times.shift();
+  }
+  times.push(now);
+  return times.length;
+}
+
 const { memory } = await init();
 
-export const useAnimation = ({ universe, setGenCount, isPlaying }) => {
+export const useAnimation = ({ universe, setGenCount, isPlaying, setAvgFps }) => {
   const animationRef = useRef(0);
   const canvasRef = useRef(null);
   const height = universe.height();
@@ -15,6 +24,7 @@ export const useAnimation = ({ universe, setGenCount, isPlaying }) => {
   useEffect(() => {
     const renderCanvas = async (time, keepRendering = true) => {
       if (canvasRef.current) {
+        setAvgFps(measureFps(performance.now()));
         // await pause(100);
         universe.tick();
         setGenCount((prev) => prev + 1);

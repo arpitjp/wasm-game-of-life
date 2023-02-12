@@ -3,11 +3,12 @@ import { useAnimation } from "../hooks/useAnimation";
 
 export const Canvas = ({ universe, dimension, isPlaying, setIsPlaying }) => {
   const [genCount, setGenCount] = useState(0);
-  const canvasRef = useAnimation({ universe, setGenCount, isPlaying });
+  const [avgFps, setAvgFps] = useState(0);
+  const canvasRef = useAnimation({ universe, setGenCount, isPlaying, setAvgFps });
 
   return <>
     <h3 style={{ margin: '0px 0px 5px 0px' }}>Game of Life</h3>
-    <p style={{ margin: '0px 0px 15px 0px', fontSize: '11px' }}>Dimension: {dimension} | Generation: {genCount}</p>
+    <p style={{ margin: '0px 0px 15px 0px', fontSize: '11px' }}>Dimension: {dimension} | Generation: {genCount} | Average FPS: {avgFps}</p>
     <div style={{
       display: 'flex',
       justifyContent: 'center',
