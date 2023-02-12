@@ -16,3 +16,4 @@ To deploy to GitHub pages, run
 - [] Stabilize frame rate
 - [] Frame rate control
 - [] Average frame rate info
+- Enable clear button when the render is paused
