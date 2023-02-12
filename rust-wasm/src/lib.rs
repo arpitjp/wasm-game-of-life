@@ -3,6 +3,14 @@ use std::fmt;
 use wasm_bindgen::prelude::*;
 
 extern crate js_sys;
+extern crate web_sys;
+
+// A macro to provide `println!(..)`-style syntax for `console.log` logging.
+macro_rules! log {
+    ( $( $t:tt )* ) => {
+        web_sys::console::log_1(&format!( $( $t )* ).into());
+    }
+}
 
 // When the `wee_alloc` feature is enabled, use `wee_alloc` as the global
 // allocator.
@@ -28,6 +36,7 @@ pub struct Universe {
 #[wasm_bindgen]
 impl Universe {
     pub fn new(height: u32, width: u32, random: bool) -> Universe {
+        utils::set_panic_hook();
         let cells = (0..height*width).map(|i| {
             match random {
                 true => {
@@ -81,13 +90,21 @@ impl Universe {
             for c in 0..self.width {
                 let idx = self.get_cell(r, c);
                 let live_neighbours = self.live_neighbour_count(r, c);
+                // log!(
+                //     "cell[{}, {}] is initially {:?} and has {} live neighbors",
+                //     r,
+                //     c,
+                //     self.cells[idx],
+                //     live_neighbours
+                // );
                 new_gen[idx] = match(live_neighbours, self.cells[idx]) {
-                    (3, Cell::Dead) => Cell::Alive, // re-birth
-                    (x, Cell::Alive) if x < 2 => Cell::Dead, // under population (no sex)
-                    (2, Cell::Alive) | (3, Cell::Alive) => Cell::Alive, // perfectly balanced
-                    (x, Cell::Alive) if x > 3 => Cell::Dead, // over population
+                    (3, Cell::Dead) => Cell::Alive, // Rule1: re-birth
+                    (x, Cell::Alive) if x < 2 => Cell::Dead, // Rule2: under population (no sex)
+                    (2, Cell::Alive) | (3, Cell::Alive) => Cell::Alive, // Rule3: perfectly balanced
+                    (x, Cell::Alive) if x > 3 => Cell::Dead, // Rule4: over population
                     (_, x) => x // same old same old
-                }
+                };
+                // log!("    it becomes {:?}", new_gen[idx]);
             }
         }
 
