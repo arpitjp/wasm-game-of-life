@@ -46,7 +46,7 @@ export const useAnimation = ({
 
           // await pause(100);
           if (!universe.tick()) {
-            keepRendering && openSnackbar('Game Over! (All cells are dead) 🙁', 3000);
+            keepRendering && openSnackbar('All cells are dead 🙁. Click on few cells & re-try', 3000);
             setIsPlaying(false);
             setGenCount(0);
           };
@@ -91,6 +91,7 @@ export const useAnimation = ({
     return () => cancelAnimationFrame(animationRef.current);
   }, [height, isPlaying, setGenCount, universe, width, fps, setAvgFps, setIsPlaying]);
 
+  // touch event listener
   useEffect(() => {
     const canvas = canvasRef.current;
     canvas.addEventListener(
@@ -117,6 +118,7 @@ export const useAnimation = ({
           Math.floor(canvasLeft / (CELL_SIZE + 1)),
           width - 1
         );
+        window.navigator.vibrate(100);
         universe.toggle_cell(row, col);
 
         drawGrid({ ctx, width, height });

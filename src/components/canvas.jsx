@@ -45,7 +45,7 @@ export const Canvas = ({ universe, dimension, isPlaying, setIsPlaying }) => {
           <button
             style={buttonStyle}
             onClick={() => {
-              setIsPlaying(true);
+              // setIsPlaying(true);
               universe.clear_all();
               setGenCount(0);
               setIsPlaying(false);
