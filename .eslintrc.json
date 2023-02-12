@@ -1,9 +1,5 @@
 {
-  "ignorePatterns": ["dist/**"],
   "extends": [
     "eslint-config-allinone"
-  ],
-  "parserOptions": {
-    "ecmaVersion": "latest"
-  }
+  ]
 }

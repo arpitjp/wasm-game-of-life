@@ -7,7 +7,7 @@ export const Canvas = ({ universe, dimension, isPlaying, setIsPlaying }) => {
 
   return <>
     <h3 style={{ margin: '0px 0px 5px 0px' }}>Game of Life</h3>
-    <p style={{ margin: '0px 0px 15px 0px', fontSize: '12px' }}>Dimension: {dimension} | Generation: {genCount}</p>
+    <p style={{ margin: '0px 0px 15px 0px', fontSize: '11px' }}>Dimension: {dimension} | Generation: {genCount}</p>
     <div style={{
       display: 'flex',
       justifyContent: 'center',
