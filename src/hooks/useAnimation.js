@@ -8,11 +8,11 @@ const { memory } = await init();
 export const useAnimation = ({ universe, setGenCount, isPlaying }) => {
   const animationRef = useRef(0);
   const canvasRef = useRef(null);
+  const height = universe.height();
+  const width = universe.width();
 
+  // this handles play/pause and next gen animation
   useEffect(() => {
-    const height = universe.height();
-    const width = universe.width();
-
     const renderCanvas = async (time, keepRendering = true) => {
       if (canvasRef.current) {
         // await pause(100);
@@ -49,7 +49,32 @@ export const useAnimation = ({ universe, setGenCount, isPlaying }) => {
       animationRef.current = requestAnimationFrame((time) => renderCanvas(time, false));
     }
     return () => cancelAnimationFrame(animationRef.current);
-  }, [isPlaying, setGenCount, universe])
+  }, [height, isPlaying, setGenCount, universe, width])
 
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    canvas.addEventListener("click", event => {
+      event.stopImmediatePropagation();
+
+      const scale = window.devicePixelRatio;
+      const ctx = canvas.getContext('2d');
+      const boundingRect = canvas.getBoundingClientRect();
+    
+      const scaleX = canvas.width / boundingRect.width;
+      const scaleY = canvas.height / boundingRect.height;
+    
+      const canvasLeft = (event.clientX - boundingRect.left) * scaleX/scale;
+      const canvasTop = (event.clientY - boundingRect.top) * scaleY/scale;
+    
+      const row = Math.min(Math.floor(canvasTop / (CELL_SIZE + 1)), height - 1);
+      const col = Math.min(Math.floor(canvasLeft / (CELL_SIZE + 1)), width - 1);
+      console.log("row, col", row, col);
+      universe.toggle_cell(row, col);
+    
+      drawGrid({ctx, width, height});
+      drawCells({ctx, universe, memory, height, width, Cell});
+    }, false);
+    return () => canvas.removeEventListener("click", () => {});
+  }, [height, universe, width])
   return canvasRef;
 }
