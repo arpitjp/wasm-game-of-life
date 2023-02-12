@@ -25,6 +25,7 @@ export const Canvas = ({ universe, dimension, isPlaying, setIsPlaying }) => {
         onClick={() => {
           setIsPlaying(true);
           universe.clear_all();
+          setGenCount(0);
           setIsPlaying(false);
       }}>
       Clear
