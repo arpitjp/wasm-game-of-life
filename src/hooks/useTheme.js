@@ -12,7 +12,7 @@ export const obj = {
     },
     grid: {
       alive: "#323232",
-      dead: "white",
+      dead: "rgba(0,0,0,0)",
       lines: '#E8E8E8'
     }
   },
@@ -27,7 +27,7 @@ export const obj = {
     },
     grid: {
       alive: "#E3E3E3",
-      dead: "#121212",
+      dead: 'rgba(0,0,0,0)',//"#121212",
       lines: '#1E1E1E'
     }
   }
