@@ -80,7 +80,7 @@ export const Canvas = ({ universe, dimension, isPlaying, setIsPlaying }) => {
           <option value="10000">Max fps</option>
         </select>
       </div>
-      <canvas ref={canvasRef} />
+      <canvas ref={canvasRef} style={{marginBottom: '20px'}} />
     </>
   );
 };
