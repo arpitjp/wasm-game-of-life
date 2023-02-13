@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useSnackbar } from "react-simple-snackbar";
 import init, { Cell } from "rust-wasm";
 import { CELL_SIZE } from "../constants";
@@ -126,12 +126,12 @@ export const useAnimation = ({
         window.navigator.vibrate(1);
         universe.toggle_cell(row, col);
 
-        drawGrid({ ctx, width, height, theme });
-        drawCells({ ctx, universe, memory, height, width, Cell, theme });
+        drawGrid({ ctx, width, height, theme: window.theme });
+        drawCells({ ctx, universe, memory, height, width, Cell, theme: window.theme });
       },
       false
     );
     return () => canvas.removeEventListener("click", () => {});
-  }, [height, universe, width, theme]);
+  }, [height, universe, width]);
   return canvasRef;
 };

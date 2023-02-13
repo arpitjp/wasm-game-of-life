@@ -17,7 +17,7 @@ export const obj = {
     }
   },
   dark: {
-    backgroundColor: '#1F2028',
+    backgroundColor: '#121212',
     font: {
       main: 'white',
       light: 'rgba(255, 255, 255, 0.7)'
@@ -26,9 +26,9 @@ export const obj = {
       color: 'white',
     },
     grid: {
-      alive: "#A9AEC0",
-      dead: "#1F2028",
-      lines: '#090A11'
+      alive: "#E3E3E3",
+      dead: "#121212",
+      lines: '#1E1E1E'
     }
   }
 }
@@ -39,5 +39,7 @@ export const useTheme = () => {
     setIsDarkMode(isDarkMode);
     window.localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
   }
-  return { isDarkMode, setTheme, theme: isDarkMode ? obj.dark : obj.light };
+  const theme = isDarkMode ? obj.dark : obj.light;
+  window.theme = theme;
+  return { isDarkMode, setTheme, theme };
 }

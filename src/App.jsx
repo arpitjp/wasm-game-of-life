@@ -19,6 +19,7 @@ function App() {
   return (
     <div id="playground" style={{backgroundColor: theme.backgroundColor}}>
       <div
+        className="prevent-select"
         style={{
           position: "absolute",
           top: "0",
