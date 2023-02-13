@@ -1,19 +1,23 @@
 import "./index.css";
 import { useState } from "react";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
-import image from "./assets/github-mark.png";
+import lightImage from "./assets/github-mark.png";
+import darkImage from "./assets/github-mark-white.png";
 import { useUniverse } from "./hooks/useUniverse";
 import { Canvas } from "./components/canvas.jsx";
+import { useTheme } from "./hooks/useTheme";
 
 document.head.appendChild(Object.assign(document.createElement("link"), {rel: "icon", href: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧩</text></svg>"}))
 
 function App() {
   const { universe, h, w } = useUniverse();
-  const [isDarkMode, setIsDarkMode] = useState(window.localStorage.getItem('theme') === 'dark' ? true : false);
   const [isPlaying, setIsPlaying] = useState(true);
+  const { theme, setTheme, isDarkMode } = useTheme();
+
   const dimension = `${h}x${w}`;
+
   return (
-    <div id="playground">
+    <div id="playground" style={{backgroundColor: theme.backgroundColor}}>
       <div
         style={{
           position: "absolute",
@@ -37,7 +41,7 @@ function App() {
           <strong
             title="Open Wikipedia article"
             style={{
-              // outline: "1px solid black",
+              color: theme.font.main,
               borderRadius: "15px",
               fontSize: "12px",
               padding: "4px 6px",
@@ -54,7 +58,7 @@ function App() {
           href="https://github.com/arpitjp/wasm-game-of-life#readme"
         >
           <img
-            src={image}
+            src={isDarkMode ? darkImage : lightImage}
             title="Check code on GitHub"
             width="22"
             alt="GitHub Repo"
@@ -62,25 +66,21 @@ function App() {
         </a>
         <div title="Change theme">
         <DarkModeSwitch
-          style={{marginLeft: '12px'}}
+          style={{marginLeft: '14px'}}
           checked={isDarkMode}
-          onChange={() => {
-            setIsDarkMode(!isDarkMode);
-            window.localStorage.setItem('theme', isDarkMode ? 'light' : 'dark');
-            window.navigator.vibrate(1);
-          }}
+          onChange={setTheme}
           size={25}
-          moonColor='black'
         />
         </div>
       </div>
-
       <Canvas
         key={dimension}
         universe={universe}
         dimension={dimension}
         isPlaying={isPlaying}
         setIsPlaying={setIsPlaying}
+        theme={theme}
+        isDarkMode={isDarkMode}
       />
     </div>
   );

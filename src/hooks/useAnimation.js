@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useSnackbar } from "react-simple-snackbar";
 import init, { Cell } from "rust-wasm";
 import { CELL_SIZE } from "../constants";
@@ -26,6 +26,7 @@ export const useAnimation = ({
   setIsPlaying,
   setAvgFps,
   fps,
+  theme
 }) => {
   const animationRef = useRef(0);
   const canvasRef = useRef(null);
@@ -70,8 +71,8 @@ export const useAnimation = ({
           // Normalize coordinate system to use css pixels.
           ctx.scale(scale, scale);
 
-          drawGrid({ ctx, width, height });
-          drawCells({ ctx, universe, memory, height, width, Cell });
+          drawGrid({ ctx, width, height, theme });
+          drawCells({ ctx, universe, memory, height, width, Cell, theme });
         }
       }
       if (keepRendering) {
@@ -93,7 +94,7 @@ export const useAnimation = ({
       );
     }
     return () => cancelAnimationFrame(animationRef.current);
-  }, [height, isPlaying, setGenCount, universe, width, fps, setAvgFps, setIsPlaying]);
+  }, [height, isPlaying, setGenCount, universe, width, fps, setAvgFps, setIsPlaying, theme]);
 
   // touch event listener
   useEffect(() => {
@@ -125,12 +126,12 @@ export const useAnimation = ({
         window.navigator.vibrate(1);
         universe.toggle_cell(row, col);
 
-        drawGrid({ ctx, width, height });
-        drawCells({ ctx, universe, memory, height, width, Cell });
+        drawGrid({ ctx, width, height, theme });
+        drawCells({ ctx, universe, memory, height, width, Cell, theme });
       },
       false
     );
     return () => canvas.removeEventListener("click", () => {});
-  }, [height, universe, width]);
+  }, [height, universe, width, theme]);
   return canvasRef;
 };

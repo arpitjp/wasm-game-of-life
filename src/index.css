@@ -20,9 +20,20 @@ body {
   border-radius: 15px;
 }
 
-.controls:hover {
+.controls-light {
+  color: black
+}
+.controls-light:hover {
   cursor: pointer;
   outline: 0.5px solid black;
+}
+
+.controls-dark {
+  color: white
+}
+.controls-dark:hover {
+  cursor: pointer;
+  outline: 0.5px solid white;
 }
 
 #playground {

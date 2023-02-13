@@ -7,10 +7,9 @@ const frameStyle = {
   top: "0",
   left: '0',
   margin: "1vh",
-  color: 'rgba(0, 0, 0, 0.3)',
 }
 
-export const Canvas = ({ universe, dimension, isPlaying, setIsPlaying }) => {
+export const Canvas = ({ universe, dimension, isPlaying, setIsPlaying, theme, isDarkMode }) => {
   const [genCount, setGenCount] = useState(0);
   const [avgFps, setAvgFps] = useState(0);
   const [fps, setFps] = useState(window.localStorage.getItem('fps') || 30);
@@ -21,13 +20,16 @@ export const Canvas = ({ universe, dimension, isPlaying, setIsPlaying }) => {
     setIsPlaying,
     setAvgFps,
     fps,
+    theme
   });
+
+  const classes = `controls-${isDarkMode ? 'dark' : 'light'} controls`;
 
   return (
     <>
-      {isPlaying && <span style={frameStyle}>{avgFps} / {fps == 10000 ? 'Max' : fps}</span>}
-      <h3 style={{ margin: "0px 0px 5px 0px" }}>Game of Life</h3>
-      <i style={{ margin: "0px 0px 10px 0px", fontSize: "10px" }}>
+      {isPlaying && <span style={{...frameStyle, color: theme.font.light}}>{avgFps} / {fps == 100000 ? 'Max' : fps}</span>}
+      <h3 style={{ margin: "0px 0px 5px 0px", color: theme.font.main }}>Game of Life</h3>
+      <i style={{ margin: "0px 0px 10px 0px", fontSize: "10px", color: theme.font.main }}>
         Dimension: {dimension} | Generation: {genCount}
       </i>
       <div
@@ -38,14 +40,14 @@ export const Canvas = ({ universe, dimension, isPlaying, setIsPlaying }) => {
           flexDirection: "row",
         }}
       >
-        <button className="controls" onClick={() => {
+        <button className={classes} onClick={() => {
           setIsPlaying(!isPlaying)
           window.navigator.vibrate(1);
         }}>
           {isPlaying ? "Pause" : "Play"}
         </button>
         <button
-            className="controls"
+            className={classes}
             onClick={isPlaying ? () => {
               // setIsPlaying(true);
               universe.clear_all();
@@ -60,7 +62,7 @@ export const Canvas = ({ universe, dimension, isPlaying, setIsPlaying }) => {
             {isPlaying ? 'Clear' : 'Random'}
           </button>
         <select
-          className="controls"
+          className={classes}
           value={fps}
           onChange={(event) => {
             const val = parseInt(event.target.value);
@@ -74,7 +76,7 @@ export const Canvas = ({ universe, dimension, isPlaying, setIsPlaying }) => {
           <option value="20">20 fps</option>
           <option value="30">30 fps</option>
           <option value="60">60 fps</option>
-          <option value="10000">Max fps</option>
+          <option value="100000">Max fps</option>
         </select>
       </div>
       <canvas ref={canvasRef} />
