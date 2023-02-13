@@ -18,7 +18,7 @@ To deploy to GitHub pages, run
 - Game renderer - Rust compiled to WASM
 
 ## Todo
-- [ ] Dark mode
+- [ ] Dark mode (Game of death)
 - [ ] Thumbnail preview
 - [ ] Time profiling
 - [ ] Decrease WASM size

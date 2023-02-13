@@ -16,7 +16,7 @@ const frameStyle = {
   position: "absolute",
   top: "0",
   left: '0',
-  margin: "0.5vh",
+  margin: "1vh",
   color: 'rgba(0, 0, 0, 0.3)',
 }
 
