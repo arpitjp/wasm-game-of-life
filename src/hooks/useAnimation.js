@@ -127,7 +127,7 @@ export const useAnimation = ({
         universe.toggle_cell(row, col);
 
         drawGrid({ ctx, width, height, theme: window.theme });
-        drawCells({ ctx, universe, memory, height, width, Cell, theme: window.theme });
+        drawCells({ ctx, universe, memory, height, width, Cell, theme: window.theme, deadColor: window.theme.grid.deadOnToggle });
       },
       false
     );
