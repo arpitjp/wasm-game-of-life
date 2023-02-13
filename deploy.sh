@@ -26,7 +26,7 @@ git commit -m 'deploy'
 # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git main
 
 # if you are deploying to https://<USERNAME>.github.io/<REPO>
-git commit --amend --no-edit
+git commit --allow-empty -m "deployment"
 git push -f git@github.com:arpitjp/wasm-game-of-life.git main:gh-pages
 
 cd -
