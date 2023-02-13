@@ -1,6 +1,10 @@
 # Game of life
-### [View Deployment on GitHub Pages](https://arpitjp.github.io/wasm-game-of-life/)
-Click on cells to toggle state
+Implementation of Conway's game of life in WASM + React.
+- Fixed size periodic universe and wraps around
+- Click on cells in grid to toggle their state
+- Grid size is responsive, based on viewport
+- Metrics like frame rate, generation, dimensions
+#### [View Deployment on GitHub Pages](https://arpitjp.github.io/wasm-game-of-life/)
 ## Local Setup
 - Install `node`, `npm`, `rust`, `wasm-pack`
 - `npm run wasm`
@@ -12,9 +16,6 @@ To deploy to GitHub pages, run
 ## Stack
 - UI - React, Vite
 - Game renderer - Rust compiled to WASM
-
-## To do
-- [ ] Auto pause incase of zero alive cells
 
 ## Reference / Credits
 https://rustwasm.github.io/docs/book/game-of-life
