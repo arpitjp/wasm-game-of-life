@@ -17,11 +17,5 @@ To deploy to GitHub pages, run
 - UI - React, Vite
 - Game renderer - Rust compiled to WASM
 
-## Todo
-- [ ] Dark mode (Game of death)
-- [ ] Thumbnail preview
-- [ ] Time profiling
-- [ ] Decrease WASM size
-
 ## Reference / Credits
 https://rustwasm.github.io/docs/book/game-of-life
