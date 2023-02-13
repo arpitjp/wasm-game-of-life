@@ -40,6 +40,7 @@ export const useTheme = () => {
   const setTheme = (isDarkMode) => {
     setIsDarkMode(isDarkMode);
     window.localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+    window.navigator.vibrate(1);
   }
   const theme = isDarkMode ? obj.dark : obj.light;
   window.theme = theme;
