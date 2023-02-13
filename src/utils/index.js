@@ -32,10 +32,10 @@ export const drawCells = ({ ctx, universe, memory, height, width, Cell }) => {
       const idx = getIndex(row, col, width);
       ctx.fillStyle = cells[idx] === Cell.Dead ? DEAD_COLOR : ALIVE_COLOR;
       ctx.fillRect(
-        col * (CELL_SIZE + 1) + 1,
-        row * (CELL_SIZE + 1) + 1,
-        CELL_SIZE,
-        CELL_SIZE
+        col * (CELL_SIZE + 1) + 1.5,
+        row * (CELL_SIZE + 1) + 1.5,
+        CELL_SIZE+0.5,
+        CELL_SIZE+0.5
       );
     }
   }
