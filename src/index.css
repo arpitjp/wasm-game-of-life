@@ -19,12 +19,12 @@ body {
   margin: 6px 8px 10px;
   border: none;
   background-color: transparent;
+  outline: 1px solid grey;
   border-radius: 15px;
 }
 
 .controls:hover {
   cursor: pointer;
-  outline: 1px solid grey;
 }
 
 #playground {
