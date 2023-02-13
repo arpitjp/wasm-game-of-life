@@ -11,8 +11,6 @@ body {
   overflow: hidden;
 }
 
-#github-link:hover {transform: scale(1.1);}
-
 .controls {
   height: 20px;
   font-size: 12px;

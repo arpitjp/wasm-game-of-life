@@ -1,5 +1,6 @@
 import "./index.css";
 import { useState } from "react";
+import { DarkModeSwitch } from "react-toggle-dark-mode";
 import image from "./assets/github-mark.png";
 import { useUniverse } from "./hooks/useUniverse";
 import { Canvas } from "./components/canvas.jsx";
@@ -8,6 +9,7 @@ document.head.appendChild(Object.assign(document.createElement("link"), {rel: "i
 
 function App() {
   const { universe, h, w } = useUniverse();
+  const [isDarkMode, setIsDarkMode] = useState(window.localStorage.getItem('theme') === 'dark' ? true : false);
   const [isPlaying, setIsPlaying] = useState(true);
   const dimension = `${h}x${w}`;
   return (
@@ -27,28 +29,26 @@ function App() {
         }}
       >
         <a
-          id="github-link"
           target="_blank"
           rel="noopener noreferrer"
           href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life"
-          style={{ color: "black", textDecoration: "none", marginBottom: '6px' }}
+          style={{ color: "black", textDecoration: "none", marginBottom: '6px', marginRight: '8px' }}
         >
-          <span
+          <strong
             title="Open Wikipedia article"
             style={{
               // outline: "1px solid black",
               borderRadius: "15px",
               fontSize: "12px",
               padding: "4px 6px",
-              marginRight: "12px",
             }}
           >
-            Check Rules
-          </span>
+            RULES
+          </strong>
         </a>
 
         <a
-          id="github-link"
+          style={{marginRight: "12px", margin: '0px 8px'}}
           target="_blank"
           rel="noopener noreferrer"
           href="https://github.com/arpitjp/wasm-game-of-life#readme"
@@ -56,10 +56,23 @@ function App() {
           <img
             src={image}
             title="Check code on GitHub"
-            width="25"
+            width="22"
             alt="GitHub Repo"
           />
         </a>
+        <div title="Change theme">
+        <DarkModeSwitch
+          style={{marginLeft: '12px'}}
+          checked={isDarkMode}
+          onChange={() => {
+            setIsDarkMode(!isDarkMode);
+            window.localStorage.setItem('theme', isDarkMode ? 'light' : 'dark');
+            window.navigator.vibrate(1);
+          }}
+          size={25}
+          moonColor='black'
+        />
+        </div>
       </div>
 
       <Canvas
