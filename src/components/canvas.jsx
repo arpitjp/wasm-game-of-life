@@ -1,16 +1,6 @@
 import { useState } from "react";
 import { useAnimation } from "../hooks/useAnimation";
 
-const buttonStyle = {
-  height: "20px",
-  fontSize: '12px',
-  margin: "8px",
-  border: "none",
-  backgroundColor: "transparent",
-  outline: "1px solid grey",
-  borderRadius: "15px",
-};
-
 const frameStyle = {
   fontSize: "1.5vh",
   position: "absolute",
@@ -48,14 +38,14 @@ export const Canvas = ({ universe, dimension, isPlaying, setIsPlaying }) => {
           flexDirection: "row",
         }}
       >
-        <button style={buttonStyle} onClick={() => {
+        <button className="controls" onClick={() => {
           setIsPlaying(!isPlaying)
           window.navigator.vibrate(1);
         }}>
           {isPlaying ? "Pause ⏸" : "Play ▶"}
         </button>
         <button
-            style={buttonStyle}
+            className="controls"
             onClick={isPlaying ? () => {
               // setIsPlaying(true);
               universe.clear_all();
@@ -70,7 +60,7 @@ export const Canvas = ({ universe, dimension, isPlaying, setIsPlaying }) => {
             {isPlaying ? 'Clear' : 'Reload ↻'}
           </button>
         <select
-          style={buttonStyle}
+          className="controls"
           value={fps}
           onChange={(event) => {
             const val = parseInt(event.target.value);
