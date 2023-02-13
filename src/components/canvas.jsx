@@ -12,7 +12,7 @@ const buttonStyle = {
 };
 
 const frameStyle = {
-  fontSize: "2vh",
+  fontSize: "1.5vh",
   position: "absolute",
   top: "0",
   left: '0',
