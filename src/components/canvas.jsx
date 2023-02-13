@@ -48,7 +48,10 @@ export const Canvas = ({ universe, dimension, isPlaying, setIsPlaying }) => {
           flexDirection: "row",
         }}
       >
-        <button style={buttonStyle} onClick={() => setIsPlaying(!isPlaying)}>
+        <button style={buttonStyle} onClick={() => {
+          setIsPlaying(!isPlaying)
+          window.navigator.vibrate(1);
+        }}>
           {isPlaying ? "Pause ⏸" : "Play ▶"}
         </button>
         <button
@@ -58,7 +61,11 @@ export const Canvas = ({ universe, dimension, isPlaying, setIsPlaying }) => {
               universe.clear_all();
               setGenCount(0);
               setIsPlaying(false);
-            } : () => window.location.reload()}
+              window.navigator.vibrate(1);
+            } : () => {
+              window.location.reload();
+              window.navigator.vibrate(1);
+            }}
           >
             {isPlaying ? 'Clear' : 'Reload ↻'}
           </button>
