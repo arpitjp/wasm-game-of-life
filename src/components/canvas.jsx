@@ -57,7 +57,7 @@ export const Canvas = ({ universe, dimension, isPlaying, setIsPlaying }) => {
               window.navigator.vibrate(1);
             }}
           >
-            {isPlaying ? 'Clear' : 'Reload ↻'}
+            {isPlaying ? 'Clear' : 'Reload'}
           </button>
         <select
           className="controls"

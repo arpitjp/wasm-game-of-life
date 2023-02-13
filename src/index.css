@@ -16,15 +16,15 @@ body {
 .controls {
   height: 20px;
   font-size: 12px;
-  margin: 6px 8px 10px;
+  margin: 6px 8px 12px;
   border: none;
   background-color: transparent;
-  outline: 1px solid grey;
   border-radius: 15px;
 }
 
 .controls:hover {
   cursor: pointer;
+  outline: 0.5px solid black;
 }
 
 #playground {
