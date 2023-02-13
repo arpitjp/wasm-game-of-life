@@ -34,7 +34,7 @@ export const obj = {
 }
 
 export const useTheme = () => {
-  const [isDarkMode, setIsDarkMode] = useState(window.localStorage.getItem('theme') === 'dark');
+  const [isDarkMode, setIsDarkMode] = useState(window.localStorage.getItem('theme') === 'light' ? false : true);
   const setTheme = (isDarkMode) => {
     setIsDarkMode(isDarkMode);
     window.localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
