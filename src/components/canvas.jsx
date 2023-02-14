@@ -29,7 +29,7 @@ export const Canvas = ({ universe, dimension, isPlaying, setIsPlaying, theme, is
   return (
     <>
       {isPlaying && <span className="prevent-select" style={{ ...frameStyle, color: theme.font.light }}>{avgFps} / {fps == 100000 ? 'Max' : fps}</span>}
-      <h3 style={{ margin: "0px 0px 5px 0px", color: theme.font.main }}>Game of Life</h3>
+      <h1 style={{ margin: "0px 0px 5px 0px", color: theme.font.main, fontSize: '20px' }}>Game of Life</h1>
       <i style={{ margin: "0px 0px 10px 0px", fontSize: "10px", color: theme.font.main }}>
         Dimension: {dimension} | Generation: {genCount}
       </i>
