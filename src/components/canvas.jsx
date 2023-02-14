@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAnimation } from "../hooks/useAnimation";
+import vibrate from "../utils/vibrate";
 
 const frameStyle = {
   fontSize: "1.5vh",
@@ -42,7 +43,7 @@ export const Canvas = ({ universe, dimension, isPlaying, setIsPlaying, theme, is
       >
         <button className={classes} onClick={() => {
           setIsPlaying(!isPlaying)
-          window.navigator.vibrate(1);
+          vibrate();
         }}>
           {isPlaying ? "Pause" : "Play"}
         </button>
@@ -53,10 +54,10 @@ export const Canvas = ({ universe, dimension, isPlaying, setIsPlaying, theme, is
             universe.clear_all();
             setGenCount(0);
             setIsPlaying(false);
-            window.navigator.vibrate(1);
+            vibrate();
           } : () => {
             window.location.reload();
-            window.navigator.vibrate(1);
+            vibrate();
           }}
         >
           {isPlaying ? 'Clear' : 'Random'}

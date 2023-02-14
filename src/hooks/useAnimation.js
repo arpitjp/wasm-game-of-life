@@ -3,6 +3,7 @@ import { useSnackbar } from "react-simple-snackbar";
 import init, { Cell } from "rust-wasm";
 import { CELL_SIZE } from "../constants";
 import { drawCells, drawGrid, pause } from "../utils";
+import vibrate from "../utils/vibrate";
 
 // measure average fps
 var times = [];
@@ -123,7 +124,7 @@ export const useAnimation = ({
           Math.floor(canvasLeft / (CELL_SIZE + 1)),
           width - 1
         );
-        window.navigator.vibrate(1);
+        vibrate();
         universe.toggle_cell(row, col);
 
         drawGrid({ ctx, width, height, theme: window.theme });

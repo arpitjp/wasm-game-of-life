@@ -6,6 +6,7 @@ import darkImage from "./assets/github-mark-white.png";
 import { useUniverse } from "./hooks/useUniverse";
 import { Canvas } from "./components/canvas.jsx";
 import { useTheme } from "./hooks/useTheme";
+import vibrate from "./utils/vibrate";
 
 document.head.appendChild(Object.assign(document.createElement("link"), {rel: "icon", href: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧩</text></svg>"}))
 
@@ -35,6 +36,7 @@ function App() {
       >
         <a
           target="_blank"
+          onClick={() => vibrate()}
           rel="noopener noreferrer"
           href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life"
           style={{ color: "black", textDecoration: "none", marginBottom: '6px', marginRight: '8px' }}
@@ -55,6 +57,7 @@ function App() {
         <a
           style={{marginRight: "12px", margin: '0px 8px'}}
           target="_blank"
+          onClick={() => vibrate()}
           rel="noopener noreferrer"
           href="https://github.com/arpitjp/wasm-game-of-life#readme"
         >
